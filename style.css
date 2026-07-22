@@ -261,6 +261,21 @@ body {
   padding: 24px 0;
 }
 
+.weather {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 16px 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.weather-temp {
+  font-variant-numeric: tabular-nums;
+}
+
 .ringing-overlay {
   position: fixed;
   inset: 0;

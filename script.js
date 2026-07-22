@@ -240,3 +240,21 @@ alarmListEl.addEventListener("click", (e) => {
 renderAlarms();
 updateClock();
 setInterval(updateClock, 1000);
+
+const WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?lat=37.5665&lon=126.9780&units=metric&appid=aafbe71f69d7ebca5e1b4171349021dc";
+const weatherTempEl = document.getElementById("weatherTemp");
+
+async function loadWeather() {
+  try {
+    const res = await fetch(WEATHER_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const temp = data?.main?.temp;
+    if (typeof temp !== "number") throw new Error("기온 정보 없음");
+    weatherTempEl.textContent = `서울 기온: ${Math.round(temp * 10) / 10}°C`;
+  } catch (e) {
+    weatherTempEl.textContent = "기온 정보를 불러올 수 없습니다.";
+  }
+}
+
+loadWeather();
