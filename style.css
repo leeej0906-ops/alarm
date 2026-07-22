@@ -51,6 +51,13 @@ body {
   padding: 28px 0 8px;
 }
 
+.clock-icon {
+  width: 50%;
+  height: auto;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 6px 14px rgba(79, 109, 245, 0.25));
+}
+
 .clock-time {
   font-size: 48px;
   font-weight: 700;
