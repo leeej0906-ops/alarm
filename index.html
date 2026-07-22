@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>알람</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="clock">
+      <div class="clock-time" id="clockTime">00:00:00</div>
+      <div class="clock-date" id="clockDate">2026년 1월 1일 목요일</div>
+    </header>
+
+    <section class="add-alarm">
+      <input type="time" id="alarmTimeInput">
+      <input type="text" id="alarmLabelInput" placeholder="알람 이름 (선택)" maxlength="30">
+      <div class="repeat-days" id="repeatDays">
+        <button type="button" class="day-btn" data-day="0">일</button>
+        <button type="button" class="day-btn" data-day="1">월</button>
+        <button type="button" class="day-btn" data-day="2">화</button>
+        <button type="button" class="day-btn" data-day="3">수</button>
+        <button type="button" class="day-btn" data-day="4">목</button>
+        <button type="button" class="day-btn" data-day="5">금</button>
+        <button type="button" class="day-btn" data-day="6">토</button>
+      </div>
+      <button type="button" id="addAlarmBtn" class="add-btn">알람 추가</button>
+    </section>
+
+    <section class="alarm-list-section">
+      <h2>알람 목록</h2>
+      <ul class="alarm-list" id="alarmList"></ul>
+      <p class="empty-msg" id="emptyMsg">등록된 알람이 없습니다.</p>
+    </section>
+  </div>
+
+  <div class="ringing-overlay" id="ringingOverlay">
+    <div class="ringing-box">
+      <div class="ringing-icon">⏰</div>
+      <div class="ringing-time" id="ringingTime">00:00</div>
+      <div class="ringing-label" id="ringingLabel"></div>
+      <div class="ringing-actions">
+        <button type="button" id="snoozeBtn">5분 후 다시 알림</button>
+        <button type="button" id="stopBtn">알람 끄기</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

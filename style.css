@@ -1,0 +1,335 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  color-scheme: light dark;
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --text: #1c1c1e;
+  --muted: #7a7a80;
+  --accent: #4f6df5;
+  --accent-soft: #eaedff;
+  --danger: #ef4444;
+  --border: #e5e6eb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #101114;
+    --card: #1b1c20;
+    --text: #f2f2f4;
+    --muted: #9a9aa2;
+    --accent: #7c8dff;
+    --accent-soft: #262a4a;
+    --border: #2c2d33;
+  }
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.app {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.clock {
+  text-align: center;
+  padding: 28px 0 8px;
+}
+
+.clock-time {
+  font-size: 48px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+}
+
+.clock-date {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.add-alarm {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.add-alarm input[type="time"],
+.add-alarm input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+}
+
+.add-alarm input[type="time"] {
+  font-variant-numeric: tabular-nums;
+}
+
+.repeat-days {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.day-btn {
+  flex: 1;
+  padding: 8px 0;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.day-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.add-btn {
+  padding: 12px 0;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-btn:active {
+  opacity: 0.85;
+}
+
+.alarm-list-section h2 {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 10px;
+  padding-left: 4px;
+}
+
+.alarm-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alarm-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.alarm-item.disabled .alarm-time,
+.alarm-item.disabled .alarm-label {
+  opacity: 0.4;
+}
+
+.alarm-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.alarm-time {
+  font-size: 24px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.alarm-label {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.alarm-days {
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.alarm-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.switch {
+  position: relative;
+  width: 46px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.15s;
+}
+
+.switch input:checked + .slider {
+  background: var(--accent);
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+.delete-btn {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 6px;
+  line-height: 1;
+}
+
+.delete-btn:hover {
+  color: var(--danger);
+}
+
+.empty-msg {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 24px 0;
+}
+
+.ringing-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 16px;
+}
+
+.ringing-overlay.show {
+  display: flex;
+}
+
+.ringing-box {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 36px 28px;
+  text-align: center;
+  width: 100%;
+  max-width: 340px;
+  animation: pop 0.2s ease-out;
+}
+
+@keyframes pop {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.ringing-icon {
+  font-size: 40px;
+  animation: shake 0.6s infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-12deg); }
+  75% { transform: rotate(12deg); }
+}
+
+.ringing-time {
+  font-size: 40px;
+  font-weight: 700;
+  margin-top: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ringing-label {
+  color: var(--muted);
+  margin-top: 6px;
+  min-height: 20px;
+}
+
+.ringing-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.ringing-actions button {
+  padding: 13px 0;
+  border-radius: 12px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#snoozeBtn {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+#stopBtn {
+  background: var(--accent);
+  color: #fff;
+}
