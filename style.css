@@ -140,6 +140,35 @@ body {
   opacity: 0.85;
 }
 
+.save-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.save-btn {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.save-btn:active {
+  opacity: 0.85;
+}
+
+.save-status {
+  font-size: 13px;
+  color: var(--muted);
+  min-height: 16px;
+}
+
 .alarm-list-section h2 {
   font-size: 15px;
   color: var(--muted);

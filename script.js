@@ -13,6 +13,8 @@ const ringingTimeEl = document.getElementById("ringingTime");
 const ringingLabelEl = document.getElementById("ringingLabel");
 const snoozeBtn = document.getElementById("snoozeBtn");
 const stopBtn = document.getElementById("stopBtn");
+const saveNowBtn = document.getElementById("saveNowBtn");
+const saveStatusEl = document.getElementById("saveStatus");
 
 const DAY_NAMES = ["일", "월", "화", "수", "목", "금", "토"];
 let selectedDays = new Set();
@@ -251,6 +253,34 @@ alarmListEl.addEventListener("click", (e) => {
   alarms = alarms.filter((a) => a.id !== id);
   saveAlarms();
   renderAlarms();
+});
+
+saveNowBtn.addEventListener("click", async () => {
+  saveStatusEl.textContent = "저장 중...";
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8",
+      },
+      body: JSON.stringify({ alarms }),
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+
+    const data = await res.json();
+    if (data && data.result === "success") {
+      const now = new Date();
+      const timeText = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+      saveStatusEl.textContent = `저장되었습니다 (${timeText})`;
+    } else {
+      saveStatusEl.textContent = "저장에 실패했습니다";
+    }
+  } catch (e) {
+    saveStatusEl.textContent = "저장에 실패했습니다";
+  }
 });
 
 renderAlarms();

@@ -1,2 +1,3 @@
 const SUPABASE_NEWS_FUNCTION_URL = "https://nhmukztrgcbqxclynvhp.supabase.co/functions/v1/naver-news";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5obXVrenRyZ2NicXhjbHludmhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NTUyNzQsImV4cCI6MjA5OTIzMTI3NH0.fBabDpxEkiWUEsMXg8TTa9Yv--mrW-ZBR8lgNSCo7zg";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzNack2CVKDL9WYjcvA7rhK7JBXH1DRYrRkbPCxf3jCnUtnR5CHZSoQ3mfiAV7VZOO0/exec";
