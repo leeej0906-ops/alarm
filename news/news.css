@@ -113,3 +113,69 @@
 .news-briefing-list:empty {
   display: none;
 }
+
+.keyword-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 16px;
+}
+
+.keyword-modal-overlay.show {
+  display: flex;
+}
+
+.keyword-modal {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 24px 20px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.keyword-modal-label {
+  font-size: 14px;
+  color: var(--text);
+  margin: 0 0 12px;
+}
+
+.keyword-modal-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 15px;
+  box-sizing: border-box;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.keyword-modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.keyword-modal-actions button {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#keywordModalCancelBtn {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+#keywordModalConfirmBtn {
+  background: var(--accent);
+  color: #fff;
+}

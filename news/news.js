@@ -1,6 +1,10 @@
 const newsBtn = document.getElementById("newsBtn");
 const newsListEl = document.getElementById("newsList");
 const newsBriefingListEl = document.getElementById("newsBriefingList");
+const keywordModalOverlay = document.getElementById("keywordModalOverlay");
+const keywordModalInput = document.getElementById("keywordModalInput");
+const keywordModalConfirmBtn = document.getElementById("keywordModalConfirmBtn");
+const keywordModalCancelBtn = document.getElementById("keywordModalCancelBtn");
 
 const ORDINAL_WORDS = ["첫번째", "두번째", "세번째", "네번째", "다섯번째"];
 
@@ -112,8 +116,41 @@ async function fetchAndRenderNews(keyword) {
   }
 }
 
-newsBtn.addEventListener("click", () => {
-  const keyword = window.prompt("검색할 뉴스 키워드를 입력하세요.");
+function promptNewsKeyword() {
+  return new Promise((resolve) => {
+    keywordModalInput.value = "";
+    keywordModalOverlay.classList.add("show");
+    keywordModalInput.focus();
+
+    function onConfirm() {
+      cleanup(keywordModalInput.value.trim());
+    }
+
+    function onCancel() {
+      cleanup(null);
+    }
+
+    function onKeydown(e) {
+      if (e.key === "Enter") onConfirm();
+      if (e.key === "Escape") onCancel();
+    }
+
+    function cleanup(result) {
+      keywordModalOverlay.classList.remove("show");
+      keywordModalConfirmBtn.removeEventListener("click", onConfirm);
+      keywordModalCancelBtn.removeEventListener("click", onCancel);
+      keywordModalInput.removeEventListener("keydown", onKeydown);
+      resolve(result);
+    }
+
+    keywordModalConfirmBtn.addEventListener("click", onConfirm);
+    keywordModalCancelBtn.addEventListener("click", onCancel);
+    keywordModalInput.addEventListener("keydown", onKeydown);
+  });
+}
+
+newsBtn.addEventListener("click", async () => {
+  const keyword = await promptNewsKeyword();
   if (!keyword) return;
   fetchAndRenderNews(keyword);
 });
