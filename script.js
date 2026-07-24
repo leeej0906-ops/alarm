@@ -22,6 +22,9 @@ let ringingAlarmId = null;
 let audioCtx = null;
 let alarmIntervalId = null;
 
+const ALARM_NEWS_KEYWORD = "속보";
+const ALARM_NEWS_COUNT = 3;
+
 function loadAlarms() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -74,11 +77,23 @@ function triggerAlarm(alarm) {
   ringingLabelEl.textContent = alarm.label || "";
   ringingOverlay.classList.add("show");
   startSound();
+  briefRecentNews();
 
   if (alarm.days.length === 0) {
     alarm.enabled = false;
     saveAlarms();
     renderAlarms();
+  }
+}
+
+async function briefRecentNews() {
+  try {
+    const data = await fetchRecentNews(ALARM_NEWS_KEYWORD, ALARM_NEWS_COUNT);
+    if (!data || !Array.isArray(data.items) || data.items.length === 0) return;
+    renderNewsBriefing(data.items);
+    speakBriefing(buildBriefingText(data.items));
+  } catch (e) {
+    // 뉴스 브리핑은 부가 기능이므로 실패해도 알람 소리에는 영향을 주지 않는다.
   }
 }
 
@@ -121,6 +136,7 @@ function stopSound() {
 function dismissRinging() {
   ringingOverlay.classList.remove("show");
   stopSound();
+  stopBriefing();
   ringingAlarmId = null;
 }
 
